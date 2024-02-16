@@ -73,9 +73,14 @@ func (j *job) Execute() error {
 
 	messageAttr := j.sqsMessage().MessageAttributes
 
-	logrus.Debugf("Message [%s]", messageAttr)
-	logrus.Debugf("Job [%s]", j)
-	logrus.Debugf("Job Owner [%s]", j.ownerId)
+	logrus.Debugf("Message: [%s]", messageAttr)
+	logrus.Debugf("Message Owner ID: [%s]", *messageAttr[ownerId].StringValue)
+	logrus.Debugf("Message Channel ID: [%s]", *messageAttr[channelId].StringValue)
+	logrus.Debugf("Job Owner ID: [%s]", j.ownerId)
+	
+	logrus.Debugf("MessageAttr == nil? [%s]", messageAttr == nil)
+	logrus.Debugf("Owner ID [%s]", *messageAttr[ownerId].StringValue != j.ownerId)
+	logrus.Debugf("Channel ID [%s]", *messageAttr[channelId].StringValue != j.ownerId)
 
 	if messageAttr == nil ||
 		*messageAttr[ownerId].StringValue != j.ownerId &&

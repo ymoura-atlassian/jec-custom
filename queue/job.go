@@ -76,7 +76,6 @@ func (j *job) Execute() error {
 	logrus.Debugf("Message [%s]", messageAttr)
 	logrus.Debugf("Job [%s]", j)
 	logrus.Debugf("Job Owner [%s]", j.ownerId)
-	logrus.Debugf("Job Channel [%s]", j.channelId)
 
 	if messageAttr == nil ||
 		*messageAttr[ownerId].StringValue != j.ownerId &&
